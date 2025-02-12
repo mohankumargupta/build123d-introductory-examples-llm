@@ -1,4 +1,4 @@
-- define each parameter variable on its own license
+- define each parameter variable on its own line
   eg. if there is a line:
      length, width, thickness = 80.0, 60.0, 10.0
 

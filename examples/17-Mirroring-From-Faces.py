@@ -8,3 +8,5 @@ with BuildPart() as ex17:
         RegularPolygon(radius=a, side_count=5)
     extrude(amount=b)
     mirror(ex17.part, about=Plane(ex17.faces().group_by(Axis.Y)[0][0]))
+
+part = ex17.part

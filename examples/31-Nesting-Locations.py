@@ -12,3 +12,5 @@ with BuildPart() as ex31:
             RegularPolygon(b, 4)
         RegularPolygon(3 * b, 6, rotation=30)
     extrude(amount=c)
+
+part = ex31.part

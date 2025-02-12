@@ -45,6 +45,7 @@ thickness = 10.0
 with BuildPart() as ex1:
     Box(length, width, thickness)
 
+part = ex1.part
 
 ##########################################
 # 2. Plane with Hole
@@ -60,11 +61,12 @@ with BuildPart() as ex2:
     Box(length, width, thickness)
     Cylinder(radius=center_hole_dia / 2, height=thickness, mode=Mode.SUBTRACT)
 
+part = ex2.part
 
 I want you to notice the modifications made:
-
 - removed the import on the first line
 - for each example added import underneath the comment line
+- added a final line part=[variable].part where variable is to be replaced with same name as on the BuildPart
 
 PYTHON PROGRAM STARTS HERE:
 

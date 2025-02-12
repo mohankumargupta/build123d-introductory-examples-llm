@@ -9,3 +9,5 @@ with BuildPart() as ex13:
             CounterSinkHole(radius=b, counter_sink_radius=2 * b)
         with PolarLocations(radius=a, count=4, start_angle=45, angular_range=360):
             CounterBoreHole(radius=b, counter_bore_radius=2 * b, counter_bore_depth=b)
+
+part = ex13.part

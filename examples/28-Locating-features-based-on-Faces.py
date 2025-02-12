@@ -12,3 +12,5 @@ with BuildPart() as ex28:
     for face in midfaces:
         with Locations(face):
             Hole(thickness / 2)
+
+part = ex28.part

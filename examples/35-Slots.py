@@ -16,3 +16,5 @@ with BuildPart() as ex35:
             RadiusArc((0, -width / 2), (width / 2, 0), radius=-width / 2)
         SlotArc(arc=ex35_ln2.edges()[0], height=thickness, rotation=0)
     extrude(amount=-thickness, mode=Mode.SUBTRACT)
+
+part = ex35.part

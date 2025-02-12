@@ -13,3 +13,5 @@ with BuildPart() as ex5:
         with Locations((0, b)):
             Circle(d, mode=Mode.SUBTRACT)
     extrude(amount=c)
+
+part = ex5.part

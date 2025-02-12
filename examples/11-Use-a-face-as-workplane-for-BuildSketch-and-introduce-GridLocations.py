@@ -14,3 +14,5 @@ with BuildPart() as ex11:
         with GridLocations(length / 2, width / 2, 2, 2):
             RegularPolygon(radius=5, side_count=5)
     extrude(amount=-thickness, mode=Mode.SUBTRACT)
+
+part = ex11.part

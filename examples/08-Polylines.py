@@ -22,3 +22,5 @@ with BuildPart() as ex8:
             mirror(ex8_ln.line, about=Plane.YZ)
         make_face()
     extrude(amount=L)
+
+part = ex8.part

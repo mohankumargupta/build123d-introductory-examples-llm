@@ -11,3 +11,5 @@ with BuildPart() as ex14:
     with BuildSketch(Plane.XZ) as ex14_sk:
         Rectangle(b, b)
     sweep()
+
+part = ex14.part

@@ -27,3 +27,5 @@ with BuildPart() as ex30:
             l1 = Bezier(pts, weights=wts)
         make_face()
     extrude(amount=10)
+
+part = ex30.part

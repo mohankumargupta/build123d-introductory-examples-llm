@@ -10,3 +10,5 @@ with BuildPart() as ex27:
         Circle(width / 4)
     extrude(amount=-thickness, mode=Mode.SUBTRACT)
     split(bisect_by=Plane(ex27.faces().sort_by(Axis.Y)[-1]).offset(-width / 2))
+
+part = ex27.part

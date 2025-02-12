@@ -19,3 +19,5 @@ with BuildPart() as ex23:
             Circle(25)
         split(bisect_by=Plane.ZY)
     revolve(axis=Axis.Z)
+
+part = ex23.part

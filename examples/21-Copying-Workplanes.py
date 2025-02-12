@@ -10,3 +10,5 @@ with BuildPart() as ex21:
     with BuildSketch(Plane(origin=ex21.part.center(), z_dir=(-1, 0, 0))):
         Circle(width / 2)
     extrude(amount=length)
+
+part = ex21.part

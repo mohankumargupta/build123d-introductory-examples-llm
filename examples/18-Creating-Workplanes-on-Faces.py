@@ -13,3 +13,5 @@ with BuildPart() as ex18:
     with BuildSketch(ex18.faces().sort_by(Axis.Z)[-1]):
         Rectangle(2 * b, 2 * b)
     extrude(amount=-thickness, mode=Mode.SUBTRACT)
+
+part = ex18.part

@@ -19,3 +19,5 @@ with BuildPart() as ex16:
     mirror(ex16_single.part, about=Plane.YX.offset(width))
     mirror(ex16_single.part, about=Plane.YZ.offset(width))
     mirror(ex16_single.part, about=Plane.YZ.offset(-width))
+
+part = ex16.part

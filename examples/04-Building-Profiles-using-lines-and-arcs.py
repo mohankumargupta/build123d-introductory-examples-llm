@@ -13,3 +13,5 @@ with BuildPart() as ex4:
             l4 = Line((0.0, width), (0, 0))
         make_face()
     extrude(amount=thickness)
+
+part = ex4.part

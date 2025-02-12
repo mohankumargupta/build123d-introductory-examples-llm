@@ -19,3 +19,5 @@ with BuildPart() as ex12:
             l4 = Line((0, 0), (0, 20))
         make_face()
     extrude(amount=10)
+
+part = ex12.part

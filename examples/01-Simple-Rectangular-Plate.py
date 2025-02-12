@@ -6,3 +6,5 @@ thickness = 10.0
 
 with BuildPart() as ex1:
     Box(length, width, thickness)
+
+part = ex1.part

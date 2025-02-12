@@ -11,6 +11,8 @@ with BuildPart() as ex6:
             Circle(c, mode=Mode.SUBTRACT)
     extrude(amount=c)
 
+part = ex6.part
+
 
 from build123d import *
 
@@ -24,3 +26,5 @@ with BuildPart() as ex7:
         with Locations((0, 3 * c), (0, -3 * c)):
             RegularPolygon(radius=2 * c, side_count=6, mode=Mode.SUBTRACT)
     extrude(amount=c)
+
+part = ex7.part

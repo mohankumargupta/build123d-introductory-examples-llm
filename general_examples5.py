@@ -10,6 +10,7 @@ thickness = 10.0
 with BuildPart() as ex1:
     Box(length, width, thickness)
 
+part = ex1.part
 
 ##########################################
 # 2. Plane with Hole
@@ -25,6 +26,7 @@ with BuildPart() as ex2:
     Box(length, width, thickness)
     Cylinder(radius=center_hole_dia / 2, height=thickness, mode=Mode.SUBTRACT)
 
+part = ex2.part
 
 ##########################################
 # 3. An extruded prismatic solid
@@ -41,6 +43,7 @@ with BuildPart() as ex3:
         Rectangle(length / 2, width / 2, mode=Mode.SUBTRACT)
     extrude(amount=2 * thickness)
 
+part = ex3.part
 
 ##########################################
 # 4. Building Profiles using lines and arcs
@@ -61,6 +64,7 @@ with BuildPart() as ex4:
         make_face()
     extrude(amount=thickness)
 
+part = ex4.part
 
 ##########################################
 # 5. Moving The Current working point
@@ -81,6 +85,7 @@ with BuildPart() as ex5:
             Circle(d, mode=Mode.SUBTRACT)
     extrude(amount=c)
 
+part = ex5.part
 
 ##########################################
 # 6. Using Point Lists
@@ -98,6 +103,8 @@ with BuildPart() as ex6:
             Circle(c, mode=Mode.SUBTRACT)
     extrude(amount=c)
 
+part = ex6.part
+
 #############################
 # 7. Polygons
 
@@ -114,6 +121,7 @@ with BuildPart() as ex7:
             RegularPolygon(radius=2 * c, side_count=6, mode=Mode.SUBTRACT)
     extrude(amount=c)
 
+part = ex7.part
 
 ##########################################
 # 8. Polylines
@@ -143,6 +151,7 @@ with BuildPart() as ex8:
         make_face()
     extrude(amount=L)
 
+part = ex8.part
 
 ##########################################
 # 9. Selectors, fillets, and chamfers
@@ -158,6 +167,7 @@ with BuildPart() as ex9:
     chamfer(ex9.edges().group_by(Axis.Z)[-1], length=4)
     fillet(ex9.edges().filter_by(Axis.Z), radius=5)
 
+part = ex9.part
 
 ##########################################
 # 10. Select Last and Hole
@@ -173,6 +183,7 @@ with BuildPart() as ex10:
     Hole(radius=width / 4)
     fillet(ex10.edges(Select.LAST).group_by(Axis.Z)[-1], radius=2)
 
+part = ex10.part
 
 ##########################################
 # 11. Use a face as workplane for BuildSketch and introduce GridLocations
@@ -194,6 +205,7 @@ with BuildPart() as ex11:
             RegularPolygon(radius=5, side_count=5)
     extrude(amount=-thickness, mode=Mode.SUBTRACT)
 
+part = ex11.part
 
 ##########################################
 # 12. Defining an Edge with a Spline
@@ -220,6 +232,7 @@ with BuildPart() as ex12:
         make_face()
     extrude(amount=10)
 
+part = ex12.part
 
 ##########################################
 # 13. CounterBoreHoles, CounterSinkHoles and PolarLocations
@@ -236,6 +249,7 @@ with BuildPart() as ex13:
         with PolarLocations(radius=a, count=4, start_angle=45, angular_range=360):
             CounterBoreHole(radius=b, counter_bore_radius=2 * b, counter_bore_depth=b)
 
+part = ex13.part
 
 ##########################################
 # 14. Position on a line with '@', '%' and introduce sweep
@@ -254,6 +268,7 @@ with BuildPart() as ex14:
         Rectangle(b, b)
     sweep()
 
+part = ex14.part
 
 ##########################################
 # 15. Mirroring Symmetric Geometry
@@ -276,6 +291,7 @@ with BuildPart() as ex15:
         make_face()
     extrude(amount=c)
 
+part = ex15.part
 
 ##########################################
 # 16. Mirroring 3D Objects
@@ -303,6 +319,7 @@ with BuildPart() as ex16:
     mirror(ex16_single.part, about=Plane.YZ.offset(width))
     mirror(ex16_single.part, about=Plane.YZ.offset(-width))
 
+part = ex16.part
 
 ##########################################
 # 17. Mirroring From Faces
@@ -318,6 +335,7 @@ with BuildPart() as ex17:
     extrude(amount=b)
     mirror(ex17.part, about=Plane(ex17.faces().group_by(Axis.Y)[0][0]))
 
+part = ex17.part
 
 ##########################################
 # 18. Creating Workplanes on Faces
@@ -339,6 +357,7 @@ with BuildPart() as ex18:
         Rectangle(2 * b, 2 * b)
     extrude(amount=-thickness, mode=Mode.SUBTRACT)
 
+part = ex18.part
 
 ##########################################
 # 19. Locating a Workplane on a vertex
@@ -361,6 +380,7 @@ with BuildPart() as ex19:
             Circle(radius=length / 8)
     extrude(amount=-thickness, mode=Mode.SUBTRACT)
 
+part = ex19.part
 
 ##########################################
 # 20. Offset Sketch Workplane
@@ -378,6 +398,7 @@ with BuildPart() as ex20:
         Circle(width / 3)
     extrude(amount=width)
 
+part = ex20.part
 
 ##########################################
 # 21. Copying Workplanes
@@ -395,6 +416,7 @@ with BuildPart() as ex21:
         Circle(width / 2)
     extrude(amount=length)
 
+part = ex21.part
 
 ##########################################
 # 22. Rotated Workplanes
@@ -413,6 +435,7 @@ with BuildPart() as ex22:
             Circle(thickness / 4)
     extrude(amount=-100, both=True, mode=Mode.SUBTRACT)
 
+part = ex22.part
 
 ##########################################
 # 23. Revolve
@@ -439,6 +462,7 @@ with BuildPart() as ex23:
         split(bisect_by=Plane.ZY)
     revolve(axis=Axis.Z)
 
+part = ex23.part
 
 ##########################################
 # 24. Lofts
@@ -457,6 +481,7 @@ with BuildPart() as ex24:
         Rectangle(length / 6, width / 6)
     loft()
 
+part = ex24.part
 
 ##########################################
 # 25. Offset Sketch
@@ -477,6 +502,7 @@ with BuildPart() as ex25:
         offset(amount=offs, kind=Kind.INTERSECTION)
     extrude(amount=1)
 
+part = ex25.part
 
 ##########################################
 # 26. Offset Part To Create Thin features
@@ -493,6 +519,7 @@ with BuildPart() as ex26:
     topf = ex26.faces().sort_by(Axis.Z)[-1]
     offset(amount=-wall, openings=topf)
 
+part = ex26.part
 
 ##########################################
 # 27. Splitting an Object
@@ -510,6 +537,7 @@ with BuildPart() as ex27:
     extrude(amount=-thickness, mode=Mode.SUBTRACT)
     split(bisect_by=Plane(ex27.faces().sort_by(Axis.Y)[-1]).offset(-width / 2))
 
+part = ex27.part
 
 ##########################################
 # 28. Locating features based on Faces
@@ -529,6 +557,7 @@ with BuildPart() as ex28:
         with Locations(face):
             Hole(thickness / 2)
 
+part = ex28.part
 
 ##########################################
 # 29. The Classic OCC Bottle
@@ -558,6 +587,7 @@ with BuildPart() as ex29:
     necktopf = ex29.faces().sort_by(Axis.Z)[-1]
     offset(ex29.solids()[0], amount=-b, openings=necktopf)
 
+part = ex29.part
 
 ##########################################
 # 30. Bezier Curve
@@ -592,6 +622,7 @@ with BuildPart() as ex30:
         make_face()
     extrude(amount=10)
 
+part = ex30.part
 
 ##########################################
 # 31. Nesting Locations
@@ -611,6 +642,7 @@ with BuildPart() as ex31:
         RegularPolygon(3 * b, 6, rotation=30)
     extrude(amount=c)
 
+part = ex31.part
 
 ##########################################
 # 32. Python for-loop
@@ -630,6 +662,7 @@ with BuildPart() as ex32:
         add(obj)
         extrude(amount=c + 3 * idx)
 
+part = ex32.part
 
 ##########################################
 # 33. Python function and for-loop
@@ -657,6 +690,7 @@ with BuildPart() as ex33:
         add(obj)
         extrude(amount=c + 2 * idx)
 
+part = ex33.part
 
 ##########################################
 # 34. Embossed and Debossed Text
@@ -679,6 +713,7 @@ with BuildPart() as ex34:
         Text("World", font_size=fontsz, align=(Align.CENTER, Align.MAX))
     extrude(amount=-fontht, mode=Mode.SUBTRACT)
 
+part = ex34.part
 
 ##########################################
 # 35. Slots
@@ -702,6 +737,7 @@ with BuildPart() as ex35:
         SlotArc(arc=ex35_ln2.edges()[0], height=thickness, rotation=0)
     extrude(amount=-thickness, mode=Mode.SUBTRACT)
 
+part = ex35.part
 
 ##########################################
 # 36. Extrude-Until
@@ -720,3 +756,4 @@ with BuildPart() as ex36:
         Rectangle(rad, rev)
     extrude(until=Until.NEXT)
 
+part = ex36.part

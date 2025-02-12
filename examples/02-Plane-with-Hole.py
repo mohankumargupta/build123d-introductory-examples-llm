@@ -8,3 +8,5 @@ center_hole_dia = 22.0
 with BuildPart() as ex2:
     Box(length, width, thickness)
     Cylinder(radius=center_hole_dia / 2, height=thickness, mode=Mode.SUBTRACT)
+
+part = ex2.part

@@ -20,3 +20,5 @@ with BuildPart() as ex33:
     for idx, obj in enumerate(ex33_sk.sketch.faces()):
         add(obj)
         extrude(amount=c + 2 * idx)
+
+part = ex33.part

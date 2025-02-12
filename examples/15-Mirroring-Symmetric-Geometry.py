@@ -15,3 +15,5 @@ with BuildPart() as ex15:
             mirror(ex15_ln.line, about=Plane.YZ)
         make_face()
     extrude(amount=c)
+
+part = ex15.part
