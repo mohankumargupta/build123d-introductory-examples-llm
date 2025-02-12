@@ -1,0 +1,63 @@
+- take python program and put imports inside each example 
+
+
+Take this snippet:
+
+from build123d import *
+
+
+##########################################
+# 1. Simple Rectangular Plate
+
+length = 80.0
+width = 60.0
+thickness = 10.0
+
+with BuildPart() as ex1:
+    Box(length, width, thickness)
+
+
+##########################################
+# 2. Plane with Hole
+
+length = 80.0
+width = 60.0
+thickness = 10.0
+center_hole_dia = 22.0
+
+with BuildPart() as ex2:
+    Box(length, width, thickness)
+    Cylinder(radius=center_hole_dia / 2, height=thickness, mode=Mode.SUBTRACT)
+
+what I want instead is:
+
+
+
+##########################################
+# 1. Simple Rectangular Plate
+
+from build123d import *
+
+length = 80.0
+width = 60.0
+thickness = 10.0
+
+with BuildPart() as ex1:
+    Box(length, width, thickness)
+
+
+##########################################
+# 2. Plane with Hole
+
+from build123d import *
+
+length = 80.0
+width = 60.0
+thickness = 10.0
+center_hole_dia = 22.0
+
+with BuildPart() as ex2:
+    Box(length, width, thickness)
+    Cylinder(radius=center_hole_dia / 2, height=thickness, mode=Mode.SUBTRACT)
+
+PYTHON PROGRAM STARTS HERE:

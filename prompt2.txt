@@ -1,0 +1,11 @@
+- define each parameter variable on its own license
+  eg. if there is a line:
+     length, width, thickness = 80.0, 60.0, 10.0
+
+  it should be:
+  length = 80.0
+  width = 60.0
+  height = 10.0
+
+PYTHON PROGRAM STARTS HERE:
+

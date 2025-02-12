@@ -1,0 +1,11 @@
+I want to transform the python program as follows:
+
+- Keep the top level comment
+- keep from build123d import *
+- remove function write_svg() and the body contents
+- remove_svg() function calls
+- remove all lines containing # [Ex. <number>]
+- remove all lines containing  the word show_object, including in comments
+- give me back the python program with modifications made
+
+PYTHON PROGRAM STARTS HERE:
