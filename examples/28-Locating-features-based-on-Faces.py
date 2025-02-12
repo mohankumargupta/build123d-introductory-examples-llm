@@ -1,3 +1,5 @@
+from build123d import *
+
 width = 80.0
 thickness = 10.0
 

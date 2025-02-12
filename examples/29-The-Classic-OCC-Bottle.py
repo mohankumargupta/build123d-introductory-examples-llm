@@ -1,3 +1,5 @@
+from build123d import *
+
 L = 60.0
 w = 18.0
 t = 9.0

@@ -1,7 +1,7 @@
 - take python program and put imports inside each example 
 
 
-Take this snippet:
+Take this input snippet:
 
 from build123d import *
 
@@ -29,7 +29,7 @@ with BuildPart() as ex2:
     Box(length, width, thickness)
     Cylinder(radius=center_hole_dia / 2, height=thickness, mode=Mode.SUBTRACT)
 
-what I want instead is:
+Produce output snippet like:
 
 
 
@@ -59,6 +59,12 @@ center_hole_dia = 22.0
 with BuildPart() as ex2:
     Box(length, width, thickness)
     Cylinder(radius=center_hole_dia / 2, height=thickness, mode=Mode.SUBTRACT)
+
+
+I want you to notice the modifications made:
+
+- removed the import on the first line
+- for each example added import underneath the comment line
 
 PYTHON PROGRAM STARTS HERE:
 

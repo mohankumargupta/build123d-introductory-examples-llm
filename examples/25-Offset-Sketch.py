@@ -1,3 +1,5 @@
+from build123d import *
+
 rad = 50
 offs = 10
 

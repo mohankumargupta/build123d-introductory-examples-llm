@@ -1,4 +1,5 @@
-# same concept as CQ docs, but different object
+from build123d import *
+
 length = 80.0
 width = 60.0
 thickness = 10.0

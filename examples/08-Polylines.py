@@ -1,3 +1,5 @@
+from build123d import *
+
 L = 100.0
 H = 20.0
 W = 20.0

@@ -1,3 +1,5 @@
+from build123d import *
+
 rad = 6
 rev = 50
 

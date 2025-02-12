@@ -1,3 +1,5 @@
+from build123d import *
+
 width = 10.0
 length = 60.0
 

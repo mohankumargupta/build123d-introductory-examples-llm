@@ -1,3 +1,5 @@
+from build123d import *
+
 a = 80
 b = 40
 c = 20

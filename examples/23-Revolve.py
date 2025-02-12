@@ -1,3 +1,5 @@
+from build123d import *
+
 pts = [
     (-25, 35),
     (-25, 0),

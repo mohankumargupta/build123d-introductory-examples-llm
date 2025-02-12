@@ -1,4 +1,4 @@
-Create a python program. It takes a python source code as input(from a file). The file contains a list of examples like:
+Create a python program. It takes a python source code as input(from a file). The file contains a list of examples like below:
 
 ##########################################
 # 1. Simple Rectangular Plate
@@ -15,10 +15,12 @@ with BuildPart() as ex1:
 part = ex1.part
 
 
+
+
 First, create an examples folder if it does not exist.
 For each example: 
   - Create a file, in this example 01-Simple-Rectangular-Plate.py
   - put contents of the file
-
+Do this for each example you find
 
 
