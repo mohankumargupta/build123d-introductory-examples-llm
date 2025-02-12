@@ -1,41 +1,9 @@
-"""
-
-name: general_examples.py
-by:   jdegenstein
-date: December 29th 2022
-
-desc:
-
-    This is the build123d general examples python script. It generates the SVGs
-    when run as a script, and is pulled into sphinx docs by
-    tutorial_general.rst.
-
-license:
-
-    Copyright 2022 jdegenstein
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-"""
-
 from build123d import *
 
 
 ##########################################
 # 1. Simple Rectangular Plate
-
-length = 80.0
-width = 60.0
-thickness = 10.0
+length, width, thickness = 80.0, 60.0, 10.0
 
 with BuildPart() as ex1:
     Box(length, width, thickness)
@@ -43,10 +11,7 @@ with BuildPart() as ex1:
 
 ##########################################
 # 2. Plane with Hole
-
-length = 80.0
-width = 60.0
-thickness = 10.0
+length, width, thickness = 80.0, 60.0, 10.0
 center_hole_dia = 22.0
 
 with BuildPart() as ex2:
@@ -56,10 +21,7 @@ with BuildPart() as ex2:
 
 ##########################################
 # 3. An extruded prismatic solid
-
-length = 80.0
-width = 60.0
-thickness = 10.0
+length, width, thickness = 80.0, 60.0, 10.0
 
 with BuildPart() as ex3:
     with BuildSketch() as ex3_sk:
@@ -69,11 +31,8 @@ with BuildPart() as ex3:
 
 
 ##########################################
-# Building Profiles using lines and arcs
-
-length = 80.0
-width = 60.0
-thickness = 10.0
+# 4. Building Profiles using lines and arcs
+length, width, thickness = 80.0, 60.0, 10.0
 
 with BuildPart() as ex4:
     with BuildSketch() as ex4_sk:
@@ -87,12 +46,8 @@ with BuildPart() as ex4:
 
 
 ##########################################
-# Moving The Current working point
-
-a = 90
-b = 45
-c = 15
-d = 7.5
+# 5. Moving The Current working point
+a, b, c, d = 90, 45, 15, 7.5
 
 with BuildPart() as ex5:
     with BuildSketch() as ex5_sk:
@@ -105,11 +60,8 @@ with BuildPart() as ex5:
 
 
 ##########################################
-# Using Point Lists
-
-a = 80
-b = 60
-c = 10
+# 6. Using Point Lists
+a, b, c = 80, 60, 10
 
 with BuildPart() as ex6:
     with BuildSketch() as ex6_sk:
@@ -118,13 +70,9 @@ with BuildPart() as ex6:
             Circle(c, mode=Mode.SUBTRACT)
     extrude(amount=c)
 
-
 #############################
-# Polygons
-
-a = 60
-b = 80
-c = 5
+# 7. Polygons
+a, b, c = 60, 80, 5
 
 with BuildPart() as ex7:
     with BuildSketch() as ex7_sk:
@@ -136,11 +84,7 @@ with BuildPart() as ex7:
 
 ##########################################
 # 8. Polylines
-
-L = 100.0
-H = 20.0
-W = 20.0
-t = 1.0
+(L, H, W, t) = (100.0, 20.0, 20.0, 1.0)
 pts = [
     (0, H / 2.0),
     (W / 2.0, H / 2.0),
@@ -163,10 +107,7 @@ with BuildPart() as ex8:
 
 ##########################################
 # 9. Selectors, fillets, and chamfers
-
-length = 80.0
-width = 60.0
-thickness = 10.0
+length, width, thickness = 80.0, 60.0, 10.0
 
 with BuildPart() as ex9:
     Box(length, width, thickness)
@@ -176,10 +117,7 @@ with BuildPart() as ex9:
 
 ##########################################
 # 10. Select Last and Hole
-
-length = 80.0
-width = 60.0
-thickness = 10.0
+length, width, thickness = 80.0, 60.0, 10.0
 
 with BuildPart() as ex10:
     Box(length, width, thickness)
@@ -189,10 +127,7 @@ with BuildPart() as ex10:
 
 ##########################################
 # 11. Use a face as workplane for BuildSketch and introduce GridLocations
-
-length = 80.0
-width = 60.0
-thickness = 10.0
+length, width, thickness = 80.0, 60.0, 10.0
 
 with BuildPart() as ex11:
     Box(length, width, thickness)
@@ -208,7 +143,6 @@ with BuildPart() as ex11:
 
 ##########################################
 # 12. Defining an Edge with a Spline
-
 pts = [
     (55, 30),
     (50, 35),
@@ -232,9 +166,7 @@ with BuildPart() as ex12:
 
 ##########################################
 # 13. CounterBoreHoles, CounterSinkHoles and PolarLocations
-
-a = 40
-b = 4
+a, b = 40, 4
 with BuildPart() as ex13:
     Cylinder(radius=50, height=10)
     with Locations(ex13.faces().sort_by(Axis.Z)[-1]):
@@ -246,9 +178,7 @@ with BuildPart() as ex13:
 
 ##########################################
 # 14. Position on a line with '@', '%' and introduce sweep
-
-a = 40
-b = 20
+a, b = 40, 20
 
 with BuildPart() as ex14:
     with BuildLine() as ex14_ln:
@@ -262,10 +192,7 @@ with BuildPart() as ex14:
 
 ##########################################
 # 15. Mirroring Symmetric Geometry
-
-a = 80
-b = 40
-c = 20
+a, b, c = 80, 40, 20
 
 with BuildPart() as ex15:
     with BuildSketch() as ex15_sk:
@@ -283,10 +210,7 @@ with BuildPart() as ex15:
 ##########################################
 # 16. Mirroring 3D Objects
 # same concept as CQ docs, but different object
-
-length = 80.0
-width = 60.0
-thickness = 10.0
+length, width, thickness = 80.0, 60.0, 10.0
 
 with BuildPart() as ex16_single:
     with BuildSketch(Plane.XZ) as ex16_sk:
@@ -307,9 +231,7 @@ with BuildPart() as ex16:
 
 ##########################################
 # 17. Mirroring From Faces
-
-a = 30
-b = 20
+a, b = 30, 20
 
 with BuildPart() as ex17:
     with BuildSketch() as ex17_sk:
@@ -321,12 +243,8 @@ with BuildPart() as ex17:
 ##########################################
 # 18. Creating Workplanes on Faces
 # based on Ex. 9
-
-length = 80.0
-width = 60.0
-thickness = 10.0
-a = 4
-b = 5
+length, width, thickness = 80.0, 60.0, 10.0
+a, b = 4, 5
 
 with BuildPart() as ex18:
     Box(length, width, thickness)
@@ -339,9 +257,7 @@ with BuildPart() as ex18:
 
 ##########################################
 # 19. Locating a Workplane on a vertex
-
-length = 80.0
-thickness = 10.0
+length, thickness = 80.0, 10.0
 
 with BuildPart() as ex19:
     with BuildSketch() as ex19_sk:
@@ -359,10 +275,7 @@ with BuildPart() as ex19:
 
 ##########################################
 # 20. Offset Sketch Workplane
-
-length = 80.0
-width = 60.0
-thickness = 10.0
+length, width, thickness = 80.0, 60.0, 10.0
 
 with BuildPart() as ex20:
     Box(length, width, thickness)
@@ -374,9 +287,7 @@ with BuildPart() as ex20:
 
 ##########################################
 # 21. Copying Workplanes
-
-width = 10.0
-length = 60.0
+width, length = 10.0, 60.0
 
 with BuildPart() as ex21:
     with BuildSketch() as ex21_sk:
@@ -389,10 +300,7 @@ with BuildPart() as ex21:
 
 ##########################################
 # 22. Rotated Workplanes
-
-length = 80.0
-width = 60.0
-thickness = 10.0
+length, width, thickness = 80.0, 60.0, 10.0
 
 with BuildPart() as ex22:
     Box(length, width, thickness)
@@ -405,7 +313,6 @@ with BuildPart() as ex22:
 
 ##########################################
 # 23. Revolve
-
 pts = [
     (-25, 35),
     (-25, 0),
@@ -429,10 +336,7 @@ with BuildPart() as ex23:
 
 ##########################################
 # 24. Lofts
-
-length = 80.0
-width = 60.0
-thickness = 10.0
+length, width, thickness = 80.0, 60.0, 10.0
 
 with BuildPart() as ex24:
     Box(length, length, thickness)
@@ -445,9 +349,7 @@ with BuildPart() as ex24:
 
 ##########################################
 # 25. Offset Sketch
-
-rad = 50
-offs = 10
+rad, offs = 50, 10
 
 with BuildPart() as ex25:
     with BuildSketch() as ex25_sk1:
@@ -463,11 +365,7 @@ with BuildPart() as ex25:
 
 ##########################################
 # 26. Offset Part To Create Thin features
-
-length = 80.0
-width = 60.0
-thickness = 10.0
-wall = 2.0
+length, width, thickness, wall = 80.0, 60.0, 10.0, 2.0
 
 with BuildPart() as ex26:
     Box(length, width, thickness)
@@ -477,10 +375,7 @@ with BuildPart() as ex26:
 
 ##########################################
 # 27. Splitting an Object
-
-length = 80.0
-width = 60.0
-thickness = 10.0
+length, width, thickness = 80.0, 60.0, 10.0
 
 with BuildPart() as ex27:
     Box(length, width, thickness)
@@ -492,9 +387,7 @@ with BuildPart() as ex27:
 
 ##########################################
 # 28. Locating features based on Faces
-
-width = 80.0
-thickness = 10.0
+width, thickness = 80.0, 10.0
 
 with BuildPart() as ex28:
     with BuildSketch() as ex28_sk:
@@ -509,13 +402,7 @@ with BuildPart() as ex28:
 
 ##########################################
 # 29. The Classic OCC Bottle
-
-L = 60.0
-w = 18.0
-t = 9.0
-b = 0.9
-h = 90.0
-n = 6.0
+L, w, t, b, h, n = 60.0, 18.0, 9.0, 0.9, 90.0, 6.0
 
 with BuildPart() as ex29:
     with BuildSketch(Plane.XY.offset(-b)) as ex29_ow_sk:
@@ -536,7 +423,6 @@ with BuildPart() as ex29:
 
 ##########################################
 # 30. Bezier Curve
-
 pts = [
     (0, 0),
     (20, 20),
@@ -568,10 +454,7 @@ with BuildPart() as ex30:
 
 ##########################################
 # 31. Nesting Locations
-
-a = 80.0
-b = 5.0
-c = 3.0
+a, b, c = 80.0, 5.0, 3.0
 
 with BuildPart() as ex31:
     with BuildSketch() as ex31_sk:
@@ -585,10 +468,7 @@ with BuildPart() as ex31:
 
 ##########################################
 # 32. Python for-loop
-
-a = 80.0
-b = 10.0
-c = 1.0
+a, b, c = 80.0, 10.0, 1.0
 
 with BuildPart() as ex32:
     with BuildSketch(mode=Mode.PRIVATE) as ex32_sk:
@@ -602,10 +482,7 @@ with BuildPart() as ex32:
 
 ##########################################
 # 33. Python function and for-loop
-
-a = 80.0
-b = 5.0
-c = 1.0
+a, b, c = 80.0, 5.0, 1.0
 
 
 def square(rad, loc):
@@ -627,12 +504,7 @@ with BuildPart() as ex33:
 
 ##########################################
 # 34. Embossed and Debossed Text
-
-length = 80.0
-width = 60.0
-thickness = 10.0
-fontsz = 25.0
-fontht = 4.0
+length, width, thickness, fontsz, fontht = 80.0, 60.0, 10.0, 25.0, 4.0
 
 with BuildPart() as ex34:
     Box(length, width, thickness)
@@ -647,10 +519,7 @@ with BuildPart() as ex34:
 
 ##########################################
 # 35. Slots
-
-length = 80.0
-width = 60.0
-thickness = 10.0
+length, width, thickness = 80.0, 60.0, 10.0
 
 with BuildPart() as ex35:
     Box(length, length, thickness)
@@ -668,9 +537,7 @@ with BuildPart() as ex35:
 
 ##########################################
 # 36. Extrude-Until
-
-rad = 6
-rev = 50
+rad, rev = 6, 50
 
 with BuildPart() as ex36:
     with BuildSketch() as ex36_sk:

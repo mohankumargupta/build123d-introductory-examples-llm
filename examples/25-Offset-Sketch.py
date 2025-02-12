@@ -1,5 +1,3 @@
-from build123d import *
-
 rad = 50
 offs = 10
 
@@ -13,5 +11,3 @@ with BuildPart() as ex25:
         RegularPolygon(radius=rad, side_count=5)
         offset(amount=offs, kind=Kind.INTERSECTION)
     extrude(amount=1)
-
-part = ex25.part

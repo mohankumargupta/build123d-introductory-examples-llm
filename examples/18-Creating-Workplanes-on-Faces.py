@@ -1,7 +1,4 @@
 # based on Ex. 9
-
-from build123d import *
-
 length = 80.0
 width = 60.0
 thickness = 10.0
@@ -15,5 +12,3 @@ with BuildPart() as ex18:
     with BuildSketch(ex18.faces().sort_by(Axis.Z)[-1]):
         Rectangle(2 * b, 2 * b)
     extrude(amount=-thickness, mode=Mode.SUBTRACT)
-
-part = ex18.part

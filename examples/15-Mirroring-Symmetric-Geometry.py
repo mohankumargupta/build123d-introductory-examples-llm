@@ -1,5 +1,3 @@
-from build123d import *
-
 a = 80
 b = 40
 c = 20
@@ -15,5 +13,3 @@ with BuildPart() as ex15:
             mirror(ex15_ln.line, about=Plane.YZ)
         make_face()
     extrude(amount=c)
-
-part = ex15.part

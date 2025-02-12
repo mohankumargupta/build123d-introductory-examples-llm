@@ -1,5 +1,3 @@
-from build123d import *
-
 L = 100.0
 H = 20.0
 W = 20.0
@@ -22,5 +20,3 @@ with BuildPart() as ex8:
             mirror(ex8_ln.line, about=Plane.YZ)
         make_face()
     extrude(amount=L)
-
-part = ex8.part

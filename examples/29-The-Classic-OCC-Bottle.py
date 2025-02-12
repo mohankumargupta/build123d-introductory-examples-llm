@@ -1,5 +1,3 @@
-from build123d import *
-
 L = 60.0
 w = 18.0
 t = 9.0
@@ -22,5 +20,3 @@ with BuildPart() as ex29:
     extrude(amount=n)
     necktopf = ex29.faces().sort_by(Axis.Z)[-1]
     offset(ex29.solids()[0], amount=-b, openings=necktopf)
-
-part = ex29.part

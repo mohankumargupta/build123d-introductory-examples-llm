@@ -1,7 +1,4 @@
 # same concept as CQ docs, but different object
-
-from build123d import *
-
 length = 80.0
 width = 60.0
 thickness = 10.0
@@ -15,13 +12,9 @@ with BuildPart() as ex16_single:
         Rectangle(length, width, align=(Align.MIN, Align.MIN), mode=Mode.SUBTRACT)
     extrude(amount=length)
 
-part = ex16_single.part
-
 with BuildPart() as ex16:
     add(ex16_single.part)
     mirror(ex16_single.part, about=Plane.XY.offset(width))
     mirror(ex16_single.part, about=Plane.YX.offset(width))
     mirror(ex16_single.part, about=Plane.YZ.offset(width))
     mirror(ex16_single.part, about=Plane.YZ.offset(-width))
-
-part = ex16.part

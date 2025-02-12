@@ -1,40 +1,8 @@
-"""
-
-name: general_examples.py
-by:   jdegenstein
-date: December 29th 2022
-
-desc:
-
-    This is the build123d general examples python script. It generates the SVGs
-    when run as a script, and is pulled into sphinx docs by
-    tutorial_general.rst.
-
-license:
-
-    Copyright 2022 jdegenstein
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-"""
-
 from build123d import *
 
 
 ##########################################
 # 1. Simple Rectangular Plate
-
-from build123d import *
-
 length = 80.0
 width = 60.0
 thickness = 10.0
@@ -42,13 +10,9 @@ thickness = 10.0
 with BuildPart() as ex1:
     Box(length, width, thickness)
 
-part = ex1.part
 
 ##########################################
 # 2. Plane with Hole
-
-from build123d import *
-
 length = 80.0
 width = 60.0
 thickness = 10.0
@@ -58,13 +22,9 @@ with BuildPart() as ex2:
     Box(length, width, thickness)
     Cylinder(radius=center_hole_dia / 2, height=thickness, mode=Mode.SUBTRACT)
 
-part = ex2.part
 
 ##########################################
 # 3. An extruded prismatic solid
-
-from build123d import *
-
 length = 80.0
 width = 60.0
 thickness = 10.0
@@ -75,13 +35,9 @@ with BuildPart() as ex3:
         Rectangle(length / 2, width / 2, mode=Mode.SUBTRACT)
     extrude(amount=2 * thickness)
 
-part = ex3.part
 
 ##########################################
-# Building Profiles using lines and arcs
-
-from build123d import *
-
+# 4. Building Profiles using lines and arcs
 length = 80.0
 width = 60.0
 thickness = 10.0
@@ -96,13 +52,9 @@ with BuildPart() as ex4:
         make_face()
     extrude(amount=thickness)
 
-part = ex4.part
 
 ##########################################
-# Moving The Current working point
-
-from build123d import *
-
+# 5. Moving The Current working point
 a = 90
 b = 45
 c = 15
@@ -117,13 +69,9 @@ with BuildPart() as ex5:
             Circle(d, mode=Mode.SUBTRACT)
     extrude(amount=c)
 
-part = ex5.part
 
 ##########################################
-# Using Point Lists
-
-from build123d import *
-
+# 6. Using Point Lists
 a = 80
 b = 60
 c = 10
@@ -135,13 +83,8 @@ with BuildPart() as ex6:
             Circle(c, mode=Mode.SUBTRACT)
     extrude(amount=c)
 
-part = ex6.part
-
 #############################
-# Polygons
-
-from build123d import *
-
+# 7. Polygons
 a = 60
 b = 80
 c = 5
@@ -153,13 +96,9 @@ with BuildPart() as ex7:
             RegularPolygon(radius=2 * c, side_count=6, mode=Mode.SUBTRACT)
     extrude(amount=c)
 
-part = ex7.part
 
 ##########################################
 # 8. Polylines
-
-from build123d import *
-
 L = 100.0
 H = 20.0
 W = 20.0
@@ -183,13 +122,9 @@ with BuildPart() as ex8:
         make_face()
     extrude(amount=L)
 
-part = ex8.part
 
 ##########################################
 # 9. Selectors, fillets, and chamfers
-
-from build123d import *
-
 length = 80.0
 width = 60.0
 thickness = 10.0
@@ -199,13 +134,9 @@ with BuildPart() as ex9:
     chamfer(ex9.edges().group_by(Axis.Z)[-1], length=4)
     fillet(ex9.edges().filter_by(Axis.Z), radius=5)
 
-part = ex9.part
 
 ##########################################
 # 10. Select Last and Hole
-
-from build123d import *
-
 length = 80.0
 width = 60.0
 thickness = 10.0
@@ -215,13 +146,9 @@ with BuildPart() as ex10:
     Hole(radius=width / 4)
     fillet(ex10.edges(Select.LAST).group_by(Axis.Z)[-1], radius=2)
 
-part = ex10.part
 
 ##########################################
 # 11. Use a face as workplane for BuildSketch and introduce GridLocations
-
-from build123d import *
-
 length = 80.0
 width = 60.0
 thickness = 10.0
@@ -237,13 +164,9 @@ with BuildPart() as ex11:
             RegularPolygon(radius=5, side_count=5)
     extrude(amount=-thickness, mode=Mode.SUBTRACT)
 
-part = ex11.part
 
 ##########################################
 # 12. Defining an Edge with a Spline
-
-from build123d import *
-
 pts = [
     (55, 30),
     (50, 35),
@@ -264,13 +187,9 @@ with BuildPart() as ex12:
         make_face()
     extrude(amount=10)
 
-part = ex12.part
 
 ##########################################
 # 13. CounterBoreHoles, CounterSinkHoles and PolarLocations
-
-from build123d import *
-
 a = 40
 b = 4
 with BuildPart() as ex13:
@@ -281,13 +200,9 @@ with BuildPart() as ex13:
         with PolarLocations(radius=a, count=4, start_angle=45, angular_range=360):
             CounterBoreHole(radius=b, counter_bore_radius=2 * b, counter_bore_depth=b)
 
-part = ex13.part
 
 ##########################################
 # 14. Position on a line with '@', '%' and introduce sweep
-
-from build123d import *
-
 a = 40
 b = 20
 
@@ -300,13 +215,9 @@ with BuildPart() as ex14:
         Rectangle(b, b)
     sweep()
 
-part = ex14.part
 
 ##########################################
 # 15. Mirroring Symmetric Geometry
-
-from build123d import *
-
 a = 80
 b = 40
 c = 20
@@ -323,14 +234,10 @@ with BuildPart() as ex15:
         make_face()
     extrude(amount=c)
 
-part = ex15.part
 
 ##########################################
 # 16. Mirroring 3D Objects
 # same concept as CQ docs, but different object
-
-from build123d import *
-
 length = 80.0
 width = 60.0
 thickness = 10.0
@@ -344,8 +251,6 @@ with BuildPart() as ex16_single:
         Rectangle(length, width, align=(Align.MIN, Align.MIN), mode=Mode.SUBTRACT)
     extrude(amount=length)
 
-part = ex16_single.part
-
 with BuildPart() as ex16:
     add(ex16_single.part)
     mirror(ex16_single.part, about=Plane.XY.offset(width))
@@ -353,13 +258,9 @@ with BuildPart() as ex16:
     mirror(ex16_single.part, about=Plane.YZ.offset(width))
     mirror(ex16_single.part, about=Plane.YZ.offset(-width))
 
-part = ex16.part
 
 ##########################################
 # 17. Mirroring From Faces
-
-from build123d import *
-
 a = 30
 b = 20
 
@@ -369,14 +270,10 @@ with BuildPart() as ex17:
     extrude(amount=b)
     mirror(ex17.part, about=Plane(ex17.faces().group_by(Axis.Y)[0][0]))
 
-part = ex17.part
 
 ##########################################
 # 18. Creating Workplanes on Faces
 # based on Ex. 9
-
-from build123d import *
-
 length = 80.0
 width = 60.0
 thickness = 10.0
@@ -391,13 +288,9 @@ with BuildPart() as ex18:
         Rectangle(2 * b, 2 * b)
     extrude(amount=-thickness, mode=Mode.SUBTRACT)
 
-part = ex18.part
 
 ##########################################
 # 19. Locating a Workplane on a vertex
-
-from build123d import *
-
 length = 80.0
 thickness = 10.0
 
@@ -414,13 +307,9 @@ with BuildPart() as ex19:
             Circle(radius=length / 8)
     extrude(amount=-thickness, mode=Mode.SUBTRACT)
 
-part = ex19.part
 
 ##########################################
 # 20. Offset Sketch Workplane
-
-from build123d import *
-
 length = 80.0
 width = 60.0
 thickness = 10.0
@@ -432,13 +321,9 @@ with BuildPart() as ex20:
         Circle(width / 3)
     extrude(amount=width)
 
-part = ex20.part
 
 ##########################################
 # 21. Copying Workplanes
-
-from build123d import *
-
 width = 10.0
 length = 60.0
 
@@ -450,13 +335,9 @@ with BuildPart() as ex21:
         Circle(width / 2)
     extrude(amount=length)
 
-part = ex21.part
 
 ##########################################
 # 22. Rotated Workplanes
-
-from build123d import *
-
 length = 80.0
 width = 60.0
 thickness = 10.0
@@ -469,13 +350,9 @@ with BuildPart() as ex22:
             Circle(thickness / 4)
     extrude(amount=-100, both=True, mode=Mode.SUBTRACT)
 
-part = ex22.part
 
 ##########################################
 # 23. Revolve
-
-from build123d import *
-
 pts = [
     (-25, 35),
     (-25, 0),
@@ -496,13 +373,9 @@ with BuildPart() as ex23:
         split(bisect_by=Plane.ZY)
     revolve(axis=Axis.Z)
 
-part = ex23.part
 
 ##########################################
 # 24. Lofts
-
-from build123d import *
-
 length = 80.0
 width = 60.0
 thickness = 10.0
@@ -515,13 +388,9 @@ with BuildPart() as ex24:
         Rectangle(length / 6, width / 6)
     loft()
 
-part = ex24.part
 
 ##########################################
 # 25. Offset Sketch
-
-from build123d import *
-
 rad = 50
 offs = 10
 
@@ -536,13 +405,9 @@ with BuildPart() as ex25:
         offset(amount=offs, kind=Kind.INTERSECTION)
     extrude(amount=1)
 
-part = ex25.part
 
 ##########################################
 # 26. Offset Part To Create Thin features
-
-from build123d import *
-
 length = 80.0
 width = 60.0
 thickness = 10.0
@@ -553,13 +418,9 @@ with BuildPart() as ex26:
     topf = ex26.faces().sort_by(Axis.Z)[-1]
     offset(amount=-wall, openings=topf)
 
-part = ex26.part
 
 ##########################################
 # 27. Splitting an Object
-
-from build123d import *
-
 length = 80.0
 width = 60.0
 thickness = 10.0
@@ -571,13 +432,9 @@ with BuildPart() as ex27:
     extrude(amount=-thickness, mode=Mode.SUBTRACT)
     split(bisect_by=Plane(ex27.faces().sort_by(Axis.Y)[-1]).offset(-width / 2))
 
-part = ex27.part
 
 ##########################################
 # 28. Locating features based on Faces
-
-from build123d import *
-
 width = 80.0
 thickness = 10.0
 
@@ -591,13 +448,9 @@ with BuildPart() as ex28:
         with Locations(face):
             Hole(thickness / 2)
 
-part = ex28.part
 
 ##########################################
 # 29. The Classic OCC Bottle
-
-from build123d import *
-
 L = 60.0
 w = 18.0
 t = 9.0
@@ -621,13 +474,9 @@ with BuildPart() as ex29:
     necktopf = ex29.faces().sort_by(Axis.Z)[-1]
     offset(ex29.solids()[0], amount=-b, openings=necktopf)
 
-part = ex29.part
 
 ##########################################
 # 30. Bezier Curve
-
-from build123d import *
-
 pts = [
     (0, 0),
     (20, 20),
@@ -656,13 +505,9 @@ with BuildPart() as ex30:
         make_face()
     extrude(amount=10)
 
-part = ex30.part
 
 ##########################################
 # 31. Nesting Locations
-
-from build123d import *
-
 a = 80.0
 b = 5.0
 c = 3.0
@@ -676,13 +521,9 @@ with BuildPart() as ex31:
         RegularPolygon(3 * b, 6, rotation=30)
     extrude(amount=c)
 
-part = ex31.part
 
 ##########################################
 # 32. Python for-loop
-
-from build123d import *
-
 a = 80.0
 b = 10.0
 c = 1.0
@@ -696,13 +537,9 @@ with BuildPart() as ex32:
         add(obj)
         extrude(amount=c + 3 * idx)
 
-part = ex32.part
 
 ##########################################
 # 33. Python function and for-loop
-
-from build123d import *
-
 a = 80.0
 b = 5.0
 c = 1.0
@@ -724,13 +561,9 @@ with BuildPart() as ex33:
         add(obj)
         extrude(amount=c + 2 * idx)
 
-part = ex33.part
 
 ##########################################
 # 34. Embossed and Debossed Text
-
-from build123d import *
-
 length = 80.0
 width = 60.0
 thickness = 10.0
@@ -747,13 +580,9 @@ with BuildPart() as ex34:
         Text("World", font_size=fontsz, align=(Align.CENTER, Align.MAX))
     extrude(amount=-fontht, mode=Mode.SUBTRACT)
 
-part = ex34.part
 
 ##########################################
 # 35. Slots
-
-from build123d import *
-
 length = 80.0
 width = 60.0
 thickness = 10.0
@@ -771,13 +600,9 @@ with BuildPart() as ex35:
         SlotArc(arc=ex35_ln2.edges()[0], height=thickness, rotation=0)
     extrude(amount=-thickness, mode=Mode.SUBTRACT)
 
-part = ex35.part
 
 ##########################################
 # 36. Extrude-Until
-
-from build123d import *
-
 rad = 6
 rev = 50
 
@@ -789,6 +614,3 @@ with BuildPart() as ex36:
     with BuildSketch() as ex36_sk2:
         Rectangle(rad, rev)
     extrude(until=Until.NEXT)
-
-part = ex36.part
-

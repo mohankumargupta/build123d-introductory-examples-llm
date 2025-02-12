@@ -1,5 +1,3 @@
-from build123d import *
-
 length = 80.0
 width = 60.0
 thickness = 10.0
@@ -10,5 +8,3 @@ with BuildPart() as ex20:
     with BuildSketch(plane.offset(2 * thickness)):
         Circle(width / 3)
     extrude(amount=width)
-
-part = ex20.part

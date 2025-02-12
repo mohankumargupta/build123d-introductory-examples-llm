@@ -1,5 +1,3 @@
-from build123d import *
-
 length = 80.0
 thickness = 10.0
 
@@ -15,5 +13,3 @@ with BuildPart() as ex19:
         with Locations((vtx.X, vtx.Y), (vtx2.X, vtx2.Y)):
             Circle(radius=length / 8)
     extrude(amount=-thickness, mode=Mode.SUBTRACT)
-
-part = ex19.part

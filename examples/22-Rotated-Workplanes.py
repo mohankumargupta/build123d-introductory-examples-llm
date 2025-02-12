@@ -1,5 +1,3 @@
-from build123d import *
-
 length = 80.0
 width = 60.0
 thickness = 10.0
@@ -11,5 +9,3 @@ with BuildPart() as ex22:
         with GridLocations(length / 4, width / 4, 2, 2):
             Circle(thickness / 4)
     extrude(amount=-100, both=True, mode=Mode.SUBTRACT)
-
-part = ex22.part

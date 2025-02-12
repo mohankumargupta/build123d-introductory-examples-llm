@@ -1,0 +1,24 @@
+Create a python program. It takes a python source code as input(from a file). The file contains a list of examples like:
+
+##########################################
+# 1. Simple Rectangular Plate
+
+from build123d import *
+
+length = 80.0
+width = 60.0
+thickness = 10.0
+
+with BuildPart() as ex1:
+    Box(length, width, thickness)
+
+part = ex1.part
+
+
+First, create an examples folder if it does not exist.
+For each example: 
+  - Create a file, in this example 01-Simple-Rectangular-Plate.py
+  - put contents of the file
+
+
+

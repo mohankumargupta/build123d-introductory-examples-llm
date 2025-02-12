@@ -1,5 +1,3 @@
-from build123d import *
-
 length = 80.0
 width = 60.0
 thickness = 10.0
@@ -11,5 +9,3 @@ with BuildPart() as ex24:
     with BuildSketch(ex24_sk.faces()[0].offset(length / 2)) as ex24_sk2:
         Rectangle(length / 6, width / 6)
     loft()
-
-part = ex24.part

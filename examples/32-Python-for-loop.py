@@ -1,5 +1,3 @@
-from build123d import *
-
 a = 80.0
 b = 10.0
 c = 1.0
@@ -12,5 +10,3 @@ with BuildPart() as ex32:
     for idx, obj in enumerate(ex32_sk.sketch.faces()):
         add(obj)
         extrude(amount=c + 3 * idx)
-
-part = ex32.part
