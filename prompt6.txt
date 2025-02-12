@@ -1,0 +1,45 @@
+Python program.
+Takes 2 arguments, input directory and output directory.
+
+The program looks for python files in the input directory, 
+and for each one produces the same filename in the output directory.
+
+For each file: eg if this was the file:
+
+```python
+from build123d import *
+
+length = 80.0
+width = 60.0
+thickness = 10.0
+
+with BuildPart() as ex1:
+    Box(length, width, thickness)
+
+part = ex1.part
+```
+
+Then I want you to do the following for each file you find in input directory:
+- Copy the file to output directory but add a "_temp" to the filename stem.
+- Take another copy of the file but this keep the original file name
+- For the file with filename stem "_", append the following line then run the python code:
+   print(part.volume)
+- Capture the output say in a variable called captured_output
+- Now with the copy in the output directory I want you to modify the file so that it looks like:
+- delte the file with filename stem "_temp"
+
+
+```python
+from build123d import *
+
+length = 80.0
+width = 60.0
+thickness = 10.0
+
+with BuildPart() as ex1:
+    Box(length, width, thickness)
+
+part = ex1.part
+# Volume: 48000 mm^3
+```
+
