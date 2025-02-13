@@ -1,0 +1,4 @@
+write a python program.
+takes 2 arguments,  an input directory(default examples_executed) and a output file(examples_final.py)
+For each file it finds the input directory, it appends to output file.
+
