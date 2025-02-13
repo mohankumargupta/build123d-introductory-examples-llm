@@ -10,17 +10,16 @@ width = 60.0
 thickness = 10.0
 
 with BuildPart() as ex1:
-    Box(length, width, thickness)
+  Box(length, width, thickness)
 
 part = ex1.part
 
 
 
-
 First, create an examples folder if it does not exist.
 For each example: 
-  - Create a file, in this example 01-Simple-Rectangular-Plate.py
-  - put contents of the file
+  - Create a file, in this example example-01.py
+  - put contents of the file, including comments.
 Do this for each example you find
 
 
