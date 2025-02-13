@@ -1,4 +1,5 @@
-Create a python program. It takes a python source code as input(from a file). The file contains a list of examples like below:
+Create a python program. It takes a python source code as input(from a file, by default general_examples5.py). The file contains a list of examples like below:
+Use pathlib.
 
 ##########################################
 # 1. Simple Rectangular Plate
@@ -17,6 +18,8 @@ part = ex1.part
 
 
 First, create an examples folder if it does not exist.
+If it does exist, remove it then create the folder.
+
 For each example: 
   - Create a file, in this example example-01.py
   - put contents of the file, including comments.

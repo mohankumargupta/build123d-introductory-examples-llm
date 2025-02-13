@@ -1,4 +1,3 @@
-##########################################
 # 2. Plane with Hole
 
 from build123d import *
@@ -13,4 +12,3 @@ with BuildPart() as ex2:
     Cylinder(radius=center_hole_dia / 2, height=thickness, mode=Mode.SUBTRACT)
 
 part = ex2.part
-

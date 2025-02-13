@@ -1,17 +1,25 @@
-##########################################
-# 13. CounterBoreHoles, CounterSinkHoles and PolarLocations
+# 12. Defining an Edge with a Spline
 
 from build123d import *
 
-a = 40
-b = 4
-with BuildPart() as ex13:
-    Cylinder(radius=50, height=10)
-    with Locations(ex13.faces().sort_by(Axis.Z)[-1]):
-        with PolarLocations(radius=a, count=4):
-            CounterSinkHole(radius=b, counter_sink_radius=2 * b)
-        with PolarLocations(radius=a, count=4, start_angle=45, angular_range=360):
-            CounterBoreHole(radius=b, counter_bore_radius=2 * b, counter_bore_depth=b)
+pts = [
+    (55, 30),
+    (50, 35),
+    (40, 30),
+    (30, 20),
+    (20, 25),
+    (10, 20),
+    (0, 20),
+]
 
-part = ex13.part
+with BuildPart() as ex12:
+    with BuildSketch() as ex12_sk:
+        with BuildLine() as ex12_ln:
+            l1 = Spline(pts)
+            l2 = Line((55, 30), (60, 0))
+            l3 = Line((60, 0), (0, 0))
+            l4 = Line((0, 0), (0, 20))
+        make_face()
+    extrude(amount=10)
 
+part = ex12.part

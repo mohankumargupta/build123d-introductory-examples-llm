@@ -1,23 +1,26 @@
-##########################################
-# 34. Embossed and Debossed Text
+# 33. Python function and for-loop
 
 from build123d import *
 
-length = 80.0
-width = 60.0
-thickness = 10.0
-fontsz = 25.0
-fontht = 4.0
+a = 80.0
+b = 5.0
+c = 1.0
 
-with BuildPart() as ex34:
-    Box(length, width, thickness)
-    topf = ex34.faces().sort_by(Axis.Z)[-1]
-    with BuildSketch(topf) as ex34_sk:
-        Text("Hello", font_size=fontsz, align=(Align.CENTER, Align.MIN))
-    extrude(amount=fontht)
-    with BuildSketch(topf) as ex34_sk2:
-        Text("World", font_size=fontsz, align=(Align.CENTER, Align.MAX))
-    extrude(amount=-fontht, mode=Mode.SUBTRACT)
 
-part = ex34.part
+def square(rad, loc):
+    with BuildSketch() as sk:
+        with Locations(loc):
+            RegularPolygon(rad, 4)
+    return sk.sketch
 
+
+with BuildPart() as ex33:
+    with BuildSketch(mode=Mode.PRIVATE) as ex33_sk:
+        locs = PolarLocations(a / 2, 6)
+        for i, j in enumerate(locs):
+            add(square(b + 2 * i, j))
+    for idx, obj in enumerate(ex33_sk.sketch.faces()):
+        add(obj)
+        extrude(amount=c + 2 * idx)
+
+part = ex33.part

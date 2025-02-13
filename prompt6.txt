@@ -1,6 +1,8 @@
 Python program.
+Use pathlib.
 Takes 2 arguments, input directory and output directory.
-
+Create output directory if it doesn't exist.
+If it does exist, remove it.s
 The program looks for python files in the input directory, 
 and for each one produces the same filename in the output directory.
 
@@ -14,7 +16,7 @@ width = 60.0
 thickness = 10.0
 
 with BuildPart() as ex1:
-    Box(length, width, thickness)
+  Box(length, width, thickness)
 
 part = ex1.part
 ```

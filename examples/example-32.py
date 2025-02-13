@@ -1,28 +1,18 @@
-##########################################
-# 33. Python function and for-loop
+# 32. Python for-loop
 
 from build123d import *
 
 a = 80.0
-b = 5.0
+b = 10.0
 c = 1.0
 
-
-def square(rad, loc):
-    with BuildSketch() as sk:
-        with Locations(loc):
-            RegularPolygon(rad, 4)
-    return sk.sketch
-
-
-with BuildPart() as ex33:
-    with BuildSketch(mode=Mode.PRIVATE) as ex33_sk:
-        locs = PolarLocations(a / 2, 6)
-        for i, j in enumerate(locs):
-            add(square(b + 2 * i, j))
-    for idx, obj in enumerate(ex33_sk.sketch.faces()):
+with BuildPart() as ex32:
+    with BuildSketch(mode=Mode.PRIVATE) as ex32_sk:
+        RegularPolygon(2 * b, 6, rotation=30)
+        with PolarLocations(a / 2, 6):
+            RegularPolygon(b, 4)
+    for idx, obj in enumerate(ex32_sk.sketch.faces()):
         add(obj)
-        extrude(amount=c + 2 * idx)
+        extrude(amount=c + 3 * idx)
 
-part = ex33.part
-
+part = ex32.part

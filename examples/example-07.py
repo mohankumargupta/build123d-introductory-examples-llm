@@ -1,30 +1,16 @@
-##########################################
-# 8. Polylines
+# 7. Polygons
 
 from build123d import *
 
-L = 100.0
-H = 20.0
-W = 20.0
-t = 1.0
-pts = [
-    (0, H / 2.0),
-    (W / 2.0, H / 2.0),
-    (W / 2.0, (H / 2.0 - t)),
-    (t / 2.0, (H / 2.0 - t)),
-    (t / 2.0, (t - H / 2.0)),
-    (W / 2.0, (t - H / 2.0)),
-    (W / 2.0, H / -2.0),
-    (0, H / -2.0),
-]
+a = 60
+b = 80
+c = 5
 
-with BuildPart() as ex8:
-    with BuildSketch(Plane.YZ) as ex8_sk:
-        with BuildLine() as ex8_ln:
-            Polyline(pts)
-            mirror(ex8_ln.line, about=Plane.YZ)
-        make_face()
-    extrude(amount=L)
+with BuildPart() as ex7:
+    with BuildSketch() as ex7_sk:
+        Rectangle(a, b)
+        with Locations((0, 3 * c), (0, -3 * c)):
+            RegularPolygon(radius=2 * c, side_count=6, mode=Mode.SUBTRACT)
+    extrude(amount=c)
 
-part = ex8.part
-
+part = ex7.part

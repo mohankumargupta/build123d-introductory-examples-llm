@@ -1,19 +1,15 @@
-##########################################
-# 14. Position on a line with '@', '%' and introduce sweep
+# 13. CounterBoreHoles, CounterSinkHoles and PolarLocations
 
 from build123d import *
 
 a = 40
-b = 20
+b = 4
+with BuildPart() as ex13:
+    Cylinder(radius=50, height=10)
+    with Locations(ex13.faces().sort_by(Axis.Z)[-1]):
+        with PolarLocations(radius=a, count=4):
+            CounterSinkHole(radius=b, counter_sink_radius=2 * b)
+        with PolarLocations(radius=a, count=4, start_angle=45, angular_range=360):
+            CounterBoreHole(radius=b, counter_bore_radius=2 * b, counter_bore_depth=b)
 
-with BuildPart() as ex14:
-    with BuildLine() as ex14_ln:
-        l1 = JernArc(start=(0, 0), tangent=(0, 1), radius=a, arc_size=180)
-        l2 = JernArc(start=l1 @ 1, tangent=l1 % 1, radius=a, arc_size=-90)
-        l3 = Line(l2 @ 1, l2 @ 1 + (-a, a))
-    with BuildSketch(Plane.XZ) as ex14_sk:
-        Rectangle(b, b)
-    sweep()
-
-part = ex14.part
-
+part = ex13.part

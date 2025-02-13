@@ -1,18 +1,16 @@
-##########################################
-# 21. Copying Workplanes
+# 20. Offset Sketch Workplane
 
 from build123d import *
 
-width = 10.0
-length = 60.0
+length = 80.0
+width = 60.0
+thickness = 10.0
 
-with BuildPart() as ex21:
-    with BuildSketch() as ex21_sk:
-        Circle(width / 2)
-    extrude(amount=length)
-    with BuildSketch(Plane(origin=ex21.part.center(), z_dir=(-1, 0, 0))):
-        Circle(width / 2)
-    extrude(amount=length)
+with BuildPart() as ex20:
+    Box(length, width, thickness)
+    plane = Plane(ex20.faces().group_by(Axis.X)[0][0])
+    with BuildSketch(plane.offset(2 * thickness)):
+        Circle(width / 3)
+    extrude(amount=width)
 
-part = ex21.part
-
+part = ex20.part

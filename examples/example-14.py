@@ -1,23 +1,17 @@
-##########################################
-# 15. Mirroring Symmetric Geometry
+# 14. Position on a line with '@', '%' and introduce sweep
 
 from build123d import *
 
-a = 80
-b = 40
-c = 20
+a = 40
+b = 20
 
-with BuildPart() as ex15:
-    with BuildSketch() as ex15_sk:
-        with BuildLine() as ex15_ln:
-            l1 = Line((0, 0), (a, 0))
-            l2 = Line(l1 @ 1, l1 @ 1 + (0, b))
-            l3 = Line(l2 @ 1, l2 @ 1 + (-c, 0))
-            l4 = Line(l3 @ 1, l3 @ 1 + (0, -c))
-            l5 = Line(l4 @ 1, (0, (l4 @ 1).Y))
-            mirror(ex15_ln.line, about=Plane.YZ)
-        make_face()
-    extrude(amount=c)
+with BuildPart() as ex14:
+    with BuildLine() as ex14_ln:
+        l1 = JernArc(start=(0, 0), tangent=(0, 1), radius=a, arc_size=180)
+        l2 = JernArc(start=l1 @ 1, tangent=l1 % 1, radius=a, arc_size=-90)
+        l3 = Line(l2 @ 1, l2 @ 1 + (-a, a))
+    with BuildSketch(Plane.XZ) as ex14_sk:
+        Rectangle(b, b)
+    sweep()
 
-part = ex15.part
-
+part = ex14.part

@@ -1,4 +1,3 @@
-##########################################
 # 1. Simple Rectangular Plate
 
 from build123d import *
@@ -11,4 +10,3 @@ with BuildPart() as ex1:
     Box(length, width, thickness)
 
 part = ex1.part
-

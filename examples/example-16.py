@@ -1,16 +1,26 @@
-##########################################
-# 17. Mirroring From Faces
+# 16. Mirroring 3D Objects
+# same concept as CQ docs, but different object
 
 from build123d import *
 
-a = 30
-b = 20
+length = 80.0
+width = 60.0
+thickness = 10.0
 
-with BuildPart() as ex17:
-    with BuildSketch() as ex17_sk:
-        RegularPolygon(radius=a, side_count=5)
-    extrude(amount=b)
-    mirror(ex17.part, about=Plane(ex17.faces().group_by(Axis.Y)[0][0]))
+with BuildPart() as ex16_single:
+    with BuildSketch(Plane.XZ) as ex16_sk:
+        Rectangle(length, width)
+        fillet(ex16_sk.vertices(), radius=length / 10)
+        with GridLocations(x_spacing=length / 4, y_spacing=0, x_count=3, y_count=1):
+            Circle(length / 12, mode=Mode.SUBTRACT)
+        Rectangle(length, width, align=(Align.MIN, Align.MIN), mode=Mode.SUBTRACT)
+    extrude(amount=length)
 
-part = ex17.part
+with BuildPart() as ex16:
+    add(ex16_single.part)
+    mirror(ex16_single.part, about=Plane.XY.offset(width))
+    mirror(ex16_single.part, about=Plane.YX.offset(width))
+    mirror(ex16_single.part, about=Plane.YZ.offset(width))
+    mirror(ex16_single.part, about=Plane.YZ.offset(-width))
 
+part = ex16.part

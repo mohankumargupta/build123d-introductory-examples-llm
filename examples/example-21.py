@@ -1,19 +1,16 @@
-##########################################
-# 22. Rotated Workplanes
+# 21. Copying Workplanes
 
 from build123d import *
 
-length = 80.0
-width = 60.0
-thickness = 10.0
+width = 10.0
+length = 60.0
 
-with BuildPart() as ex22:
-    Box(length, width, thickness)
-    pln = Plane(ex22.faces().group_by(Axis.Z)[0][0]).rotated((0, -50, 0))
-    with BuildSketch(pln) as ex22_sk:
-        with GridLocations(length / 4, width / 4, 2, 2):
-            Circle(thickness / 4)
-    extrude(amount=-100, both=True, mode=Mode.SUBTRACT)
+with BuildPart() as ex21:
+    with BuildSketch() as ex21_sk:
+        Circle(width / 2)
+    extrude(amount=length)
+    with BuildSketch(Plane(origin=ex21.part.center(), z_dir=(-1, 0, 0))):
+        Circle(width / 2)
+    extrude(amount=length)
 
-part = ex22.part
-
+part = ex21.part

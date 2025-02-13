@@ -1,21 +1,17 @@
-##########################################
-# 25. Offset Sketch
+# 24. Lofts
 
 from build123d import *
 
-rad = 50
-offs = 10
+length = 80.0
+width = 60.0
+thickness = 10.0
 
-with BuildPart() as ex25:
-    with BuildSketch() as ex25_sk1:
-        RegularPolygon(radius=rad, side_count=5)
-    with BuildSketch(Plane.XY.offset(15)) as ex25_sk2:
-        RegularPolygon(radius=rad, side_count=5)
-        offset(amount=offs)
-    with BuildSketch(Plane.XY.offset(30)) as ex25_sk3:
-        RegularPolygon(radius=rad, side_count=5)
-        offset(amount=offs, kind=Kind.INTERSECTION)
-    extrude(amount=1)
+with BuildPart() as ex24:
+    Box(length, length, thickness)
+    with BuildSketch(ex24.faces().group_by(Axis.Z)[0][0]) as ex24_sk:
+        Circle(length / 3)
+    with BuildSketch(ex24_sk.faces()[0].offset(length / 2)) as ex24_sk2:
+        Rectangle(length / 6, width / 6)
+    loft()
 
-part = ex25.part
-
+part = ex24.part

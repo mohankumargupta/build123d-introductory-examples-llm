@@ -1,4 +1,3 @@
-##########################################
 # 3. An extruded prismatic solid
 
 from build123d import *
@@ -14,4 +13,3 @@ with BuildPart() as ex3:
     extrude(amount=2 * thickness)
 
 part = ex3.part
-

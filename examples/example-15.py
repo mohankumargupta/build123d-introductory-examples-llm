@@ -1,28 +1,21 @@
-##########################################
-# 16. Mirroring 3D Objects
-# same concept as CQ docs, but different object
+# 15. Mirroring Symmetric Geometry
 
 from build123d import *
 
-length = 80.0
-width = 60.0
-thickness = 10.0
+a = 80
+b = 40
+c = 20
 
-with BuildPart() as ex16_single:
-    with BuildSketch(Plane.XZ) as ex16_sk:
-        Rectangle(length, width)
-        fillet(ex16_sk.vertices(), radius=length / 10)
-        with GridLocations(x_spacing=length / 4, y_spacing=0, x_count=3, y_count=1):
-            Circle(length / 12, mode=Mode.SUBTRACT)
-        Rectangle(length, width, align=(Align.MIN, Align.MIN), mode=Mode.SUBTRACT)
-    extrude(amount=length)
+with BuildPart() as ex15:
+    with BuildSketch() as ex15_sk:
+        with BuildLine() as ex15_ln:
+            l1 = Line((0, 0), (a, 0))
+            l2 = Line(l1 @ 1, l1 @ 1 + (0, b))
+            l3 = Line(l2 @ 1, l2 @ 1 + (-c, 0))
+            l4 = Line(l3 @ 1, l3 @ 1 + (0, -c))
+            l5 = Line(l4 @ 1, (0, (l4 @ 1).Y))
+            mirror(ex15_ln.line, about=Plane.YZ)
+        make_face()
+    extrude(amount=c)
 
-with BuildPart() as ex16:
-    add(ex16_single.part)
-    mirror(ex16_single.part, about=Plane.XY.offset(width))
-    mirror(ex16_single.part, about=Plane.YX.offset(width))
-    mirror(ex16_single.part, about=Plane.YZ.offset(width))
-    mirror(ex16_single.part, about=Plane.YZ.offset(-width))
-
-part = ex16.part
-
+part = ex15.part

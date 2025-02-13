@@ -1,27 +1,17 @@
-##########################################
-# 23. Revolve
+# 22. Rotated Workplanes
 
 from build123d import *
 
-pts = [
-    (-25, 35),
-    (-25, 0),
-    (-20, 0),
-    (-20, 5),
-    (-15, 10),
-    (-15, 35),
-]
+length = 80.0
+width = 60.0
+thickness = 10.0
 
-with BuildPart() as ex23:
-    with BuildSketch(Plane.XZ) as ex23_sk:
-        with BuildLine() as ex23_ln:
-            l1 = Polyline(pts)
-            l2 = Line(l1 @ 1, l1 @ 0)
-        make_face()
-        with Locations((0, 35)):
-            Circle(25)
-        split(bisect_by=Plane.ZY)
-    revolve(axis=Axis.Z)
+with BuildPart() as ex22:
+    Box(length, width, thickness)
+    pln = Plane(ex22.faces().group_by(Axis.Z)[0][0]).rotated((0, -50, 0))
+    with BuildSketch(pln) as ex22_sk:
+        with GridLocations(length / 4, width / 4, 2, 2):
+            Circle(thickness / 4)
+    extrude(amount=-100, both=True, mode=Mode.SUBTRACT)
 
-part = ex23.part
-
+part = ex22.part

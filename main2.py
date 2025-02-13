@@ -1,65 +1,77 @@
-import os
+import pathlib
+import shutil
+import subprocess
+import sys
 
-def split_examples_to_files(input_file_path):
+def process_python_files(input_dir_path_str, output_dir_path_str):
     """
-    Splits a file containing multiple examples separated by '#########################################'
-    into individual example files in an 'examples' folder.
+    Processes python files in the input directory, creating modified copies in the output directory.
 
     Args:
-        input_file_path (str): Path to the input file containing examples.
+        input_dir_path_str (str): Path to the input directory.
+        output_dir_path_str (str): Path to the output directory.
     """
 
-    examples_dir = "examples"
-    os.makedirs(examples_dir, exist_ok=True)  # Create 'examples' folder if it doesn't exist
+    input_dir = pathlib.Path(input_dir_path_str)
+    output_dir = pathlib.Path(output_dir_path_str)
 
+    # Create output directory if it doesn't exist, or remove and recreate if it does
+    if output_dir.exists():
+        shutil.rmtree(output_dir)  # Remove directory and all contents
+    output_dir.mkdir(parents=True)  # Create directory and any necessary parents
+
+    for input_file in input_dir.glob("*.py"):
+        if input_file.is_file():
+            process_file(input_file, output_dir)
+
+def process_file(input_file, output_dir):
+    """
+    Processes a single python file.
+
+    Args:
+        input_file (pathlib.Path): Path to the input python file.
+        output_dir (pathlib.Path): Path to the output directory.
+    """
+    output_file_original = output_dir / input_file.name
+    output_file_temp = output_dir / (input_file.stem + "_temp.py")
+
+    # Copy to _temp and original filenames
+    shutil.copy2(input_file, output_file_temp) # copy2 to preserve metadata
+    shutil.copy2(input_file, output_file_original)
+
+    # Append print statement to _temp file
+    with open(output_file_temp, "a") as f_temp:
+        f_temp.write("\nprint(part.volume)\n")
+
+    # Run the _temp file and capture output
     try:
-        with open(input_file_path, 'r') as infile:
-            content = infile.readlines()
-    except FileNotFoundError:
-        print(f"Error: Input file not found at '{input_file_path}'")
-        return
+        result = subprocess.run(
+            [sys.executable, str(output_file_temp)], # Use sys.executable to ensure correct python interpreter
+            capture_output=True,
+            text=True,
+            check=True # Raise exception for non-zero exit codes
+        )
+        captured_output = result.stdout.strip()
+    except subprocess.CalledProcessError as e:
+        print(f"Error running {output_file_temp}:")
+        print(e.stderr) # Print standard error if the script failed
+        captured_output = "Error during execution" # Or handle error as needed
 
-    example_count = 0
-    current_example_content = []
-    in_example = False
+    # Modify the original file to add the comment
+    with open(output_file_original, "a") as f_original:
+        f_original.write(f"\n# Volume: {captured_output} mm^3\n")
 
-    for line in content:
-        if line.strip() == "##########################################":
-            if in_example:
-                # Write the previous example to a file
-                if current_example_content:
-                    example_number = example_count
-                    example_filename = os.path.join(examples_dir, f"example-{example_number:02d}.py")
-                    with open(example_filename, 'w') as outfile:
-                        outfile.writelines(current_example_content)
-                    print(f"Example {example_number} written to '{example_filename}'")
-
-                current_example_content = []  # Reset for the new example
-                in_example = False
-
-            example_count += 1
-            in_example = True
-            current_example_content.append(line) # Include separator in the example file
-        elif in_example:
-            current_example_content.append(line)
-        else:
-            pass # Ignore lines before the first example if any
-
-    # Write the last example if any
-    if in_example and current_example_content:
-        example_number = example_count
-        example_filename = os.path.join(examples_dir, f"example-{example_number:02d}.py")
-        with open(example_filename, 'w') as outfile:
-            outfile.writelines(current_example_content)
-        print(f"Example {example_number} written to '{example_filename}'")
-
-    if example_count == 0:
-        print("No examples found in the input file.")
-    else:
-        print(f"Successfully processed {example_count} examples.")
-
+    # Delete the _temp file
+    output_file_temp.unlink()
 
 if __name__ == "__main__":
-    input_file = "general_examples5.py"  # Change this to your input file name if different
-    split_examples_to_files(input_file)
-    #print(f"Examples are saved in the '{os.path.basename(os.path.dirname(os.path.join(os.getcwd(), 'examples/example-01.py')))}' folder.")
+    if len(sys.argv) != 3:
+        print("Usage: python script_name.py <input_directory> <output_directory>")
+        sys.exit(1)
+
+    input_directory = sys.argv[1]
+    output_directory = sys.argv[2]
+
+    process_python_files(input_directory, output_directory)
+    print(f"Processed python files from '{input_directory}' to '{output_directory}'.")
+

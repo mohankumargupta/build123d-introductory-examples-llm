@@ -1,17 +1,19 @@
-##########################################
-# 26. Offset Part To Create Thin features
+# 25. Offset Sketch
 
 from build123d import *
 
-length = 80.0
-width = 60.0
-thickness = 10.0
-wall = 2.0
+rad = 50
+offs = 10
 
-with BuildPart() as ex26:
-    Box(length, width, thickness)
-    topf = ex26.faces().sort_by(Axis.Z)[-1]
-    offset(amount=-wall, openings=topf)
+with BuildPart() as ex25:
+    with BuildSketch() as ex25_sk1:
+        RegularPolygon(radius=rad, side_count=5)
+    with BuildSketch(Plane.XY.offset(15)) as ex25_sk2:
+        RegularPolygon(radius=rad, side_count=5)
+        offset(amount=offs)
+    with BuildSketch(Plane.XY.offset(30)) as ex25_sk3:
+        RegularPolygon(radius=rad, side_count=5)
+        offset(amount=offs, kind=Kind.INTERSECTION)
+    extrude(amount=1)
 
-part = ex26.part
-
+part = ex25.part

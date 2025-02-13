@@ -1,4 +1,3 @@
-##########################################
 # 4. Building Profiles using lines and arcs
 
 from build123d import *
@@ -18,4 +17,3 @@ with BuildPart() as ex4:
     extrude(amount=thickness)
 
 part = ex4.part
-

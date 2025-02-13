@@ -1,20 +1,16 @@
-##########################################
-# 28. Locating features based on Faces
+# 27. Splitting an Object
 
 from build123d import *
 
-width = 80.0
+length = 80.0
+width = 60.0
 thickness = 10.0
 
-with BuildPart() as ex28:
-    with BuildSketch() as ex28_sk:
-        RegularPolygon(radius=width / 4, side_count=3)
-    ex28_ex = extrude(amount=thickness, mode=Mode.PRIVATE)
-    midfaces = ex28_ex.faces().group_by(Axis.Z)[1]
-    Sphere(radius=width / 2)
-    for face in midfaces:
-        with Locations(face):
-            Hole(thickness / 2)
+with BuildPart() as ex27:
+    Box(length, width, thickness)
+    with BuildSketch(ex27.faces().sort_by(Axis.Z)[0]) as ex27_sk:
+        Circle(width / 4)
+    extrude(amount=-thickness, mode=Mode.SUBTRACT)
+    split(bisect_by=Plane(ex27.faces().sort_by(Axis.Y)[-1]).offset(-width / 2))
 
-part = ex28.part
-
+part = ex27.part

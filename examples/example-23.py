@@ -1,19 +1,25 @@
-##########################################
-# 24. Lofts
+# 23. Revolve
 
 from build123d import *
 
-length = 80.0
-width = 60.0
-thickness = 10.0
+pts = [
+    (-25, 35),
+    (-25, 0),
+    (-20, 0),
+    (-20, 5),
+    (-15, 10),
+    (-15, 35),
+]
 
-with BuildPart() as ex24:
-    Box(length, length, thickness)
-    with BuildSketch(ex24.faces().group_by(Axis.Z)[0][0]) as ex24_sk:
-        Circle(length / 3)
-    with BuildSketch(ex24_sk.faces()[0].offset(length / 2)) as ex24_sk2:
-        Rectangle(length / 6, width / 6)
-    loft()
+with BuildPart() as ex23:
+    with BuildSketch(Plane.XZ) as ex23_sk:
+        with BuildLine() as ex23_ln:
+            l1 = Polyline(pts)
+            l2 = Line(l1 @ 1, l1 @ 0)
+        make_face()
+        with Locations((0, 35)):
+            Circle(25)
+        split(bisect_by=Plane.ZY)
+    revolve(axis=Axis.Z)
 
-part = ex24.part
-
+part = ex23.part

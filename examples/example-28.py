@@ -1,30 +1,18 @@
-##########################################
-# 29. The Classic OCC Bottle
+# 28. Locating features based on Faces
 
 from build123d import *
 
-L = 60.0
-w = 18.0
-t = 9.0
-b = 0.9
-h = 90.0
-n = 6.0
+width = 80.0
+thickness = 10.0
 
-with BuildPart() as ex29:
-    with BuildSketch(Plane.XY.offset(-b)) as ex29_ow_sk:
-        with BuildLine() as ex29_ow_ln:
-            l1 = Line((0, 0), (0, w / 2))
-            l2 = ThreePointArc(l1 @ 1, (L / 2.0, w / 2.0 + t), (L, w / 2.0))
-            l3 = Line(l2 @ 1, ((l2 @ 1).X, 0, 0))
-            mirror(ex29_ow_ln.line)
-        make_face()
-    extrude(amount=h + b)
-    fillet(ex29.edges(), radius=w / 6)
-    with BuildSketch(ex29.faces().sort_by(Axis.Z)[-1]):
-        Circle(t)
-    extrude(amount=n)
-    necktopf = ex29.faces().sort_by(Axis.Z)[-1]
-    offset(ex29.solids()[0], amount=-b, openings=necktopf)
+with BuildPart() as ex28:
+    with BuildSketch() as ex28_sk:
+        RegularPolygon(radius=width / 4, side_count=3)
+    ex28_ex = extrude(amount=thickness, mode=Mode.PRIVATE)
+    midfaces = ex28_ex.faces().group_by(Axis.Z)[1]
+    Sphere(radius=width / 2)
+    for face in midfaces:
+        with Locations(face):
+            Hole(thickness / 2)
 
-part = ex29.part
-
+part = ex28.part

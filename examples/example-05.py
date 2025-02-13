@@ -1,4 +1,3 @@
-##########################################
 # 5. Moving The Current working point
 
 from build123d import *
@@ -18,4 +17,3 @@ with BuildPart() as ex5:
     extrude(amount=c)
 
 part = ex5.part
-

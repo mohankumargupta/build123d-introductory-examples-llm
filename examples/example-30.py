@@ -1,20 +1,33 @@
-##########################################
-# 31. Nesting Locations
+# 30. Bezier Curve
 
 from build123d import *
 
-a = 80.0
-b = 5.0
-c = 3.0
+pts = [
+    (0, 0),
+    (20, 20),
+    (40, 0),
+    (0, -40),
+    (-60, 0),
+    (0, 100),
+    (100, 0),
+]
 
-with BuildPart() as ex31:
-    with BuildSketch() as ex31_sk:
-        with PolarLocations(a / 2, 6):
-            with GridLocations(3 * b, 3 * b, 2, 2):
-                RegularPolygon(b, 3)
-            RegularPolygon(b, 4)
-        RegularPolygon(3 * b, 6, rotation=30)
-    extrude(amount=c)
+wts = [
+    1.0,
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    2.0,
+    1.0,
+]
 
-part = ex31.part
+with BuildPart() as ex30:
+    with BuildSketch() as ex30_sk:
+        with BuildLine() as ex30_ln:
+            l0 = Polyline(pts)
+            l1 = Bezier(pts, weights=wts)
+        make_face()
+    extrude(amount=10)
 
+part = ex30.part
