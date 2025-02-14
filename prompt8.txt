@@ -13,13 +13,24 @@ convert from build123d to fusion 360 api python script.
   print both the volume as build123 thinks it is and the calculated fusion360 volume(you can assume the first body always).   
   Print a statement that indicates if volumes are identical or not.
 - the resulting fusion360 script should be using python typing wherever possible.
+- signature of some  fusion 360 api functions:
+  def setSymmetricExtent(self, distance: core.ValueInput, isFullLength: bool, taperAngle: core.ValueInput = None) -> bool
+
+
 
 The input I am providing is a series of build123 files concatenated. 
 I want you to convert them to functions(snake case, remove non-alphanumeric chars), then
-call them from run function. 
-For each file, I want to create a new component and pass that component to the function.
+call them from run function. The function should take root component as param.
+
+Use the root component.
+Use this function to calculate volume:
+def calculate_volume(root_comp: adsk.fusion.Component) -> float:
+    return root_comp.bRepBodies.item(0).volume * 1000  # Convert cm^3 to mm^3
+
+Each function should be called with an empty document. This means that after each function is run
+and volume is calculated, delete all bodies and sketches before proceeding to the next function.
+
 If the volumes are identical, do not display anything, only if volumes are different.
-Inside the end of each function, I need to close the fusion360.
 
 
 
