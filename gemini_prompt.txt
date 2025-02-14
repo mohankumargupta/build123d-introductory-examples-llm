@@ -1,0 +1,54 @@
+convert from build123d to fusion 360 api python script.
+crucially, before using any fusion360 api function, consult the official Fusion 360 API documentation to understand
+the meaning and expected values for each parameter.
+
+- Observe symmetry
+- All 2D and 3D objects in build123d have an align property that defaults to (Align.CENTER, Align.CENTER, Align.CENTER)
+   An alignment of Align.MIN in the X direction means that the 2d or 3d shape's leftmost boundary should be at the origin
+- the following fusion 360 api functions are deprecated setAllExtent, setDistanceExtent, setOneSideToExtent, setTwoSidesDistanceExtent, setTwoSidesToExtent
+- use a helper function to convert from build123d native units to fusion 360 native units
+- do not create new component use the default one
+- In final messagebox, instead of printing dimensions, 
+  in build123d you will find the volume of the part as a comment on the last line. do not calculate build123d volume.
+  you will need to calculate the fusion 360 volume.
+  print both the volume as build123 thinks it is and the calculated fusion360 volume(you can assume the first body always).   
+  Print a statement that indicates if volumes are identical or not.
+- declare design variable in run method only,  as: design = adsk.fusion.Design.cast(app.activeProduct) 
+- signature of some  fusion 360 api functions:
+  def setSymmetricExtent(self, distance: core.ValueInput, isFullLength: bool, taperAngle: core.ValueInput = None) -> bool
+
+
+
+The input I am providing is a series of build123 files concatenated. 
+I want you to convert them to functions(snake case, remove non-alphanumeric chars), then
+call them from run function. The function should take root component as param.
+
+Use the root component.
+Use this function to calculate volume:
+def calculate_volume(root_comp: adsk.fusion.Component) -> float:
+    return root_comp.bRepBodies.item(0).volume * 1000  # Convert cm^3 to mm^3
+
+Each function should be called with an empty document. This means that after each function is run
+and volume is calculated, delete all bodies and sketches before proceeding to the next function.
+
+If the volumes are identical, do not display anything, only if volumes are different.
+
+
+
+# Contents of example-01.py
+# 1. Simple Rectangular Plate
+
+from build123d import *
+
+length = 80.0
+width = 60.0
+thickness = 10.0
+
+with BuildPart() as ex1:
+    Box(length, width, thickness)
+
+part = ex1.part
+# Volume: 48000.0 mm^3
+
+
+

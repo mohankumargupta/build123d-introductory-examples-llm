@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geminiscript"
+version = "0.0.1"
+dependencies = ["google-genai", "python-dotenv"]
+
+
+[project.optional-dependencies]
+test = ["pytest"]
+[tool.setuptools]
+py-modules = []
