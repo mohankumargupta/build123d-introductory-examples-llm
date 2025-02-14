@@ -1,0 +1,25 @@
+convert from build123d to fusion 360 api python script.
+
+- Observe symmetry
+- All 2D and 3D objects in build123d have an align property that defaults to (Align.CENTER, Align.CENTER, Align.CENTER)
+   An alignment of Align.MIN in the X direction means that the 2d or 3d shape's leftmost boundary should be at the origin
+- the following fusion 360 api functions are deprecated setAllExtent, setDistanceExtent, setOneSideToExtent, setTwoSidesDistanceExtent, setTwoSidesToExtent
+- use a helper function to convert from build123d native units to fusion 360 native units
+- do not create new component use the default one
+- copy parameters, radius and diameters, and computed parameters verbatim into the top of the fusion 360 script(directly after the imports).  
+- In final messagebox, instead of printing dimensions, 
+  in build123d you will find the volume of the part as a comment on the last line. do not calculate build123d volume.
+  you will need to calculate the fusion 360 volume.
+  print both the volume as build123 thinks it is and the calculated fusion360 volume(you can assume the first body always).   
+  Print a statement that indicates if volumes are identical or not.
+
+The input I am providing is a series of build123 files concatenated. 
+I want you to convert them to functions(snake case, remove non-alphanumeric chars), then
+call them from run function. 
+Define app,ui,design variables in run and pass these to each function.
+If the volumes are identical, do not display anything, only if volumes are different.
+Inside the end of each function, I need to close the fusion360.
+
+
+
+
