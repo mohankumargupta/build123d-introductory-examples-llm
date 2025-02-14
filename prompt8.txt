@@ -12,11 +12,12 @@ convert from build123d to fusion 360 api python script.
   you will need to calculate the fusion 360 volume.
   print both the volume as build123 thinks it is and the calculated fusion360 volume(you can assume the first body always).   
   Print a statement that indicates if volumes are identical or not.
+- the resulting fusion360 script should be using python typing wherever possible.
 
 The input I am providing is a series of build123 files concatenated. 
 I want you to convert them to functions(snake case, remove non-alphanumeric chars), then
 call them from run function. 
-Define app,ui,design variables in run and pass these to each function.
+For each file, I want to create a new component and pass that component to the function.
 If the volumes are identical, do not display anything, only if volumes are different.
 Inside the end of each function, I need to close the fusion360.
 
